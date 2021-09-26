@@ -42,7 +42,7 @@ function App() {
           <Route path="/signup">
             <Signup />
           </Route>
-          <Route path="/auth/activation/:jwt">
+          <Route path="/activation/:jwt">
             <Activation />
           </Route>
           <Route path="*">
