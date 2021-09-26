@@ -15,13 +15,23 @@ export default function Signup() {
           password: "",
         }}
         onSubmit={async ({ firstName, lastName, email, password }) => {
-          const response = await axios.post(
-            "https://googledrive-backend-aksl38.herokuapp.com/auth/signup",
-            { firstName, lastName, email, password }
-          );
-          console.log(response);
-          mailSent.current.textContent =
-            "Activation link sent to " + email + ". Please check your email.";
+          try {
+            const response = await axios.post(
+              "https://googledrive-backend-aksl38.herokuapp.com/auth/signup",
+              { firstName, lastName, email, password }
+            );
+
+            if (response.status === 200) {
+              mailSent.current.textContent = response.data.message;
+            } else {
+              mailSent.current.textContent =
+                "Something went wrong. All fields are required. " +
+                response.data.error;
+            }
+          } catch (error) {
+            mailSent.current.textContent =
+              "Something went wrong. All fields are required. " + error.message;
+          }
         }}
       >
         <Form>
