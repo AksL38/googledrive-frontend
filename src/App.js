@@ -11,6 +11,8 @@ import Dashboard from "./Dashboard";
 import Signin from "./Signin";
 import Signup from "./Signup";
 import Activation from "./Activation";
+import ForgotPassword from "./ForgotPassword";
+import ResetPassword from "./ResetPassword";
 
 function App() {
   return (
@@ -44,6 +46,12 @@ function App() {
           </Route>
           <Route path="/activation/:jwt">
             <Activation />
+          </Route>
+          <Route path="/forgotPassword">
+            <ForgotPassword />
+          </Route>
+          <Route path="/resetPassword/:jwt">
+            <ResetPassword />
           </Route>
           <Route path="*">
             <NoMatch />

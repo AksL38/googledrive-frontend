@@ -1,6 +1,7 @@
 import axios from "axios";
 import { Formik, Field, Form } from "formik";
 import { useRef } from "react";
+import { serverURI } from "./config";
 
 export default function Signup() {
   const mailSent = useRef(null);
@@ -16,10 +17,12 @@ export default function Signup() {
         }}
         onSubmit={async ({ firstName, lastName, email, password }) => {
           try {
-            const response = await axios.post(
-              "https://googledrive-backend-aksl38.herokuapp.com/auth/signup",
-              { firstName, lastName, email, password }
-            );
+            const response = await axios.post(serverURI + "/auth/signup", {
+              firstName,
+              lastName,
+              email,
+              password,
+            });
 
             if (response.status === 200) {
               mailSent.current.textContent = response.data.message;
