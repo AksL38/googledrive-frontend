@@ -1,0 +1,11 @@
+FRONTEND
+Github URL: https://github.com/AksL38/googledrive-frontend
+github frontend commit hash: ae106c68c7eda72fc0f15bad0af6fd07861ea330
+Netlify Deploy URL: https://googledrive-frontend-aksl38.netlify.app/
+
+
+
+BACKEND
+Github URL: https://github.com/AksL38/googledrive-backend
+github backend commit hash 4fc073bbe47617a0bd3c137c71f2b846f01da0f8
+heroku deploy url: https://googledrive-backend-aksl38.herokuapp.com
