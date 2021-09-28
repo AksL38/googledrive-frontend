@@ -13,52 +13,65 @@ import Signup from "./Signup";
 import Activation from "./Activation";
 import ForgotPassword from "./ForgotPassword";
 import ResetPassword from "./ResetPassword";
+import { UserContext } from "./context";
+import Signout from "./Signout";
+import LoggedStatusNavbar from "./LoggedStatusNavbar";
+import { useState } from "react";
 
 function App() {
+  const [isLogged, setLogged] = useState(false);
+  const [authorization, setAuthorization] = useState("");
   return (
-    <Router>
-      <Container>
-        <Navbar bg="light" expand="lg">
-          <Navbar.Toggle aria-controls="basic-navbar-nav" />
-          <Navbar.Collapse id="basic-navbar-nav">
-            <Nav className="me-auto">
-              <Nav.Link as={NavLink} exact to="/">
-                Dashboard
-              </Nav.Link>
-              <Nav.Link as={NavLink} to="/signin">
-                Sign in
-              </Nav.Link>
-              <Nav.Link as={NavLink} to="/signup">
-                Sign up
-              </Nav.Link>
-            </Nav>
-          </Navbar.Collapse>
-        </Navbar>
-        <Switch>
-          <Route exact path="/">
-            <Dashboard />
-          </Route>
-          <Route path="/signin">
-            <Signin />
-          </Route>
-          <Route path="/signup">
-            <Signup />
-          </Route>
-          <Route path="/activation/:jwt">
-            <Activation />
-          </Route>
-          <Route path="/forgotPassword">
-            <ForgotPassword />
-          </Route>
-          <Route path="/resetPassword/:jwt">
-            <ResetPassword />
-          </Route>
-          <Route path="*">
-            <NoMatch />
-          </Route>
-        </Switch>
-      </Container>
-    </Router>
+    <Container>
+      <UserContext.Provider
+        value={{
+          authorization,
+          isLogged,
+          setAuthorization,
+          setLogged,
+        }}
+      >
+        <Router>
+          <Navbar bg="light" expand="lg">
+            <Navbar.Toggle aria-controls="basic-navbar-nav" />
+            <Navbar.Collapse id="basic-navbar-nav">
+              <Nav className="me-auto">
+                <Nav.Link as={NavLink} exact to="/">
+                  Dashboard
+                </Nav.Link>
+                <LoggedStatusNavbar />
+              </Nav>
+            </Navbar.Collapse>
+          </Navbar>
+          <Switch>
+            <Route exact path="/">
+              <Dashboard />
+            </Route>
+            <Route path="/signin">
+              <Signin />
+            </Route>
+            <Route path="/signup">
+              <Signup />
+            </Route>
+            <Route path="/signout">
+              <Signout />
+            </Route>
+            <Route path="/activation/:jwt">
+              <Activation />
+            </Route>
+            <Route path="/forgotPassword">
+              <ForgotPassword />
+            </Route>
+            <Route path="/resetPassword/:jwt">
+              <ResetPassword />
+            </Route>
+            <Route path="*">
+              <NoMatch />
+            </Route>
+          </Switch>
+        </Router>
+      </UserContext.Provider>
+    </Container>
   );
 }
 
