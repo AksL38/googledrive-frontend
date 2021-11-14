@@ -46,7 +46,6 @@ export default function Dashboard() {
           { headers: { authorization } }
         )
         .then((resp) => {
-          console.log(resp);
           setAddFolder(addFolder + 1);
         })
         .catch((err) => console.log(err));
